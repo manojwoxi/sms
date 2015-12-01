@@ -13,8 +13,8 @@ class CreateLeavesTables extends Migration
     public function up()
     {
         Schema::create('leaves', function (Blueprint $table) {
-            $table->increments('id')->unsigned();;
-            $table->integer('student_id')->unsigned();;
+            $table->increments('id');
+            $table->integer('student_id')->unsigned();
             $table->date('from_date',20);
             $table->date('to_date',20);
             $table->date('date',20);

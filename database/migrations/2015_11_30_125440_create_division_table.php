@@ -13,7 +13,7 @@ class CreateDivisionTable extends Migration
     public function up()
     {
         Schema::create('division', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->increments('id');
             $table->string('name');
             $table->integer('class_id')->unsigned();
             $table->timestamps();

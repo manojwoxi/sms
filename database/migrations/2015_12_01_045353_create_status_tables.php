@@ -13,7 +13,7 @@ class CreateStatusTables extends Migration
     public function up()
     {
         Schema::create('status', function (Blueprint $table) {
-            $table->increments('id')->unsigned();;
+            $table->increments('id');
             $table->string('name',10);
             $table->string('slug',10);
             $table->timestamps();
