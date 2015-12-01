@@ -38,7 +38,7 @@
       <file leaf-file-name="2014_10_12_000000_create_users_table.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="11" selection-start="247" selection-end="1102" vertical-scroll-proportion="-13.851851" vertical-offset="202" max-vertical-offset="918">
+            <state line="25" column="50" selection-start="777" selection-end="777" vertical-scroll-proportion="-14.518518" vertical-offset="40" max-vertical-offset="918">
               <folding />
             </state>
           </provider>
@@ -47,7 +47,7 @@
       <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="6" selection-start="58" selection-end="58" vertical-scroll-proportion="0.1434263" vertical-offset="0" max-vertical-offset="502">
+            <state line="3" column="14" selection-start="51" selection-end="51" vertical-scroll-proportion="0.107569724" vertical-offset="0" max-vertical-offset="502">
               <folding />
             </state>
           </provider>
@@ -390,14 +390,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="11" selection-start="247" selection-end="1102" vertical-scroll-proportion="-13.851851" vertical-offset="202" max-vertical-offset="918">
+        <state line="25" column="50" selection-start="777" selection-end="777" vertical-scroll-proportion="-14.518518" vertical-offset="40" max-vertical-offset="918">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="6" selection-start="58" selection-end="58" vertical-scroll-proportion="0.1434263" vertical-offset="0" max-vertical-offset="502">
+        <state line="3" column="14" selection-start="51" selection-end="51" vertical-scroll-proportion="0.107569724" vertical-offset="0" max-vertical-offset="502">
           <folding />
         </state>
       </provider>
