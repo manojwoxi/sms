@@ -13,10 +13,10 @@ class CreateDivSubjectTable extends Migration
     public function up()
     {
         Schema::create('div_subject', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('div_id');
-            $table->integer('teacher_id');
-            $table->integer('subject_id');
+            $table->increments('id')->unsigned();;
+            $table->integer('div_id')->unsigned();;
+            $table->integer('teacher_id')->unsigned();;
+            $table->integer('subject_id')->unsigned();;
         });
     }
 
