@@ -107,7 +107,7 @@ class UsersController extends Controller
                 $UserData = $this->unsetKeys($userKeys, $UserData);
                 $systemUser = User::where('remember_token', $remember_token)->first();
                 $status = 200;
-                $message= "Student updated successfully";
+                $message= "Your Profile has been updated successfully";
                 $birthdate = date('Y-m-d', strtotime($request->birthdate));
                 $UserData['birthdate'] = $birthdate;
                 $UserData['updated_at'] = Carbon::now();
@@ -142,7 +142,7 @@ class UsersController extends Controller
             $UserData = $this->unsetKeys($userKeys, $UserData);
             $systemUser = User::where('remember_token', $remember_token)->first();
             $status = 200;
-            $message= "Student updated successfully";
+            $message= "Your Profile has been updated successfully";
             $birthdate = date('Y-m-d', strtotime($request->birthdate));
             $UserData['birthdate'] = $birthdate;
             $UserData['updated_at'] = Carbon::now();
@@ -158,4 +158,77 @@ class UsersController extends Controller
         ];
         return response($response, $status);
     }
+
+    public function adminUpdateStudentProfile(Requests\AdminUpdateStudentProfileRequest  $request, $remember_token , $id)
+     {
+        try {
+            $UserData = $request->all();
+            $userKeys = array(
+                'email',
+                'username',
+                '_method',
+                'password',
+                ' is_active',
+                ' status_id ',
+                ' role_id ',
+                ' creator_id ',
+                ' remember_token ',
+            );
+            $UserData = $this->unsetKeys($userKeys, $UserData);
+            $systemUser = User::where('id', $id)->first();
+            $status = 200;
+            $message= "Student Profile updated successfully";
+            $birthdate = date('Y-m-d', strtotime($request->birthdate));
+            $UserData['birthdate'] = $birthdate;
+            $UserData['updated_at'] = Carbon::now();
+            User::where('id',$systemUser->id)
+                ->update($UserData);
+        } catch (\Exception $e) {
+            $status = 500;
+            $message= "Profile updating failed"  . $e->getMessage();
+        }
+        $response = [
+            'message' => $message ,
+            'status'  => $status
+        ];
+        return response($response, $status);
+    }
+
+    public function adminUpdateTeacherProfile(Requests\AdminUpdateTeacherProfileRequest  $request, $remember_token,$id)
+    {
+        try {
+            $UserData = $request->all();
+            $userKeys = array(
+                'email',
+                'username',
+                '_method',
+                'password',
+                ' is_active',
+                ' status_id ',
+                ' role_id ',
+                ' creator_id ',
+                ' remember_token ',
+            );
+            $UserData = $this->unsetKeys($userKeys, $UserData);
+            $systemUser = User::where('id', $id)->first();
+            $status = 200;
+            $message= "Student Profile updated successfully";
+            $birthdate = date('Y-m-d', strtotime($request->birthdate));
+            $UserData['birthdate'] = $birthdate;
+            $UserData['updated_at'] = Carbon::now();
+            User::where('id',$systemUser->id)
+                ->update($UserData);
+        } catch (\Exception $e) {
+            $status = 500;
+            $message= "Profile updating failed"  . $e->getMessage();
+        }
+        $response = [
+            'message' => $message ,
+            'status'  => $status
+        ];
+        return response($response, $status);
+    }
+
+
+
 }
