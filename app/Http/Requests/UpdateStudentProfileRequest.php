@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateStudentProfileRequest extends Request
 {
@@ -13,9 +15,15 @@ class UpdateStudentProfileRequest extends Request
      */
     public function authorize()
     {
-        return true;
-    }
-
+        $data = $this->request->all();
+        $token = $this->route('remember_token');
+        $userToken = User::where('remember_token',$token)->first();
+        if($userToken!=null){
+            return true;
+            }else{
+                    return false;
+                 }
+        }
     /**
      * Get the validation rules that apply to the request.
      *
