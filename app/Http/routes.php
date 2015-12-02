@@ -23,6 +23,6 @@ Route::group(['prefix' => 'api/v1/user/'], function () {
     Route::post('auth','Auth\AuthController@authenticate');
     Route::get('logout','Auth\AuthController@logout');
     Route::post('create','UsersController@storeUser');
-    Route::put('my-profile/{remember_token}','UsersController@updateProfile');
-
+    Route::put('teacher-my-profile/{remember_token}','UsersController@updateTeacherProfile');//Teacher updating his own profile
+    Route::put('student-my-profile/{remember_token}','UsersController@updateStudentProfile');//Student updating his own profile
 });
