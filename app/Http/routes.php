@@ -27,5 +27,6 @@ Route::group(['prefix' => 'api/v1/user/'], function () {
     Route::post('class','ClassController@createClass');
     Route::put('class/{id}',array('uses' =>'ClassController@updateClass'));
     Route::get('class/{id}',array('uses' =>'ClassController@deleteClass'));
-
+    Route::put('teacher-my-profile/{remember_token}','UsersController@updateTeacherProfile');//Teacher updating his own profile
+    Route::put('student-my-profile/{remember_token}','UsersController@updateStudentProfile');//Student updating his own profile
 });
