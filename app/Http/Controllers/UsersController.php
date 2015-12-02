@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\Status;
+use App\Student;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class UsersController extends Controller
         $result = array();
         $result['status'] = true;
         try{
-            DB::table('student')->insert($studentData);
+            $result=Student::create($studentData);
         }catch (\Exception $e){
             $result['status'] = false;
             $result['message'] = $e->getMessage();
@@ -78,6 +79,7 @@ class UsersController extends Controller
                 $studentData['updated_at'] = Carbon::now();
                 $studentData['created_at'] = Carbon::now();
                 $result = $this->storeStudent($studentData);
+
             }
 
 
