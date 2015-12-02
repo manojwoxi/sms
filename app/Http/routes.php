@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+/* API Routes */
+Route::group(['prefix' => 'api/v1/user/'], function () {
+    Route::get('auth','UsersController@login');
+    Route::put('my-profile/{remember_token}','UsersController@updateProfile');
+});
