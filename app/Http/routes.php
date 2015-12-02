@@ -24,5 +24,8 @@ Route::group(['prefix' => 'api/v1/user/'], function () {
     Route::get('logout','Auth\AuthController@logout');
     Route::post('create','UsersController@storeUser');
     Route::put('my-profile/{remember_token}','UsersController@updateProfile');
+    Route::post('class','ClassController@createClass');
+    Route::put('class/{id}',array('uses' =>'ClassController@updateClass'));
+    Route::get('class/{id}',array('uses' =>'ClassController@deleteClass'));
 
 });
