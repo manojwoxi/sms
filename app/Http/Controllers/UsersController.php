@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Role;
 use App\Status;
 use App\Student;
@@ -14,8 +15,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\DB;
 
+
 class UsersController extends Controller
 {
+
 
     public function confirm($confirmation)
     {
@@ -90,6 +93,42 @@ class UsersController extends Controller
         $response = [
             "message" => $message
         ];
+}
+
+    public function updateProfile(Requests\UpdateStudentProfileRequest $request, $remember_token)
+    {
+      try {
+          $UserData = $request->all();
+            $userKeys = array(
+                'email',
+                'username',
+                '_method',
+                'password',
+                ' is_active',
+                ' status_id ',
+                ' role_id ',
+                ' creator_id ',
+                ' remember_token ',
+            );
+                $UserData = $this->unsetKeys($userKeys, $UserData);
+                $systemUser = User::where('remember_token', $remember_token)->first();
+                $status = 200;
+                $message= "Student updated successfully";
+                $birthdate = date('Y-m-d', strtotime($request->birthdate));
+                $UserData['birthdate'] = $birthdate;
+                $UserData['updated_at'] = Carbon::now();
+                User::where('id',$systemUser->id)
+                      ->update($UserData);
+            } catch (\Exception $e) {
+                $status = 500;
+                $message= "Profile updating failed"  . $e->getMessage();
+                }
+                $response = [
+                'message' => $message ,
+                 'status'  => $status
+                          ];
+
         return response($response, $status);
     }
+
 }
