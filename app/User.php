@@ -36,4 +36,21 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    protected $guarded = [
+        'email',
+        'is_active',
+        'status_id',
+        'role_id',
+        'remember_token'
+    ];
+
+    public function teacher()
+    {
+        return $this->hasOne('App\Teacher');
+    }
+
+    public function customer()
+    {
+        return $this->hasOne('App\Student');
+    }
 }

@@ -10,12 +10,19 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Http\Controllers\Auth\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+        return view('welcome');
 });
-/* API Routes */
+
+
 Route::group(['prefix' => 'api/v1/user/'], function () {
-    Route::get('auth','UsersController@login');
+
+    Route::get('confirm/{remember_token}','UsersController@confirm');
+    Route::post('auth','Auth\AuthController@authenticate');
+    Route::get('logout','Auth\AuthController@logout');
+    Route::post('create','UsersController@storeUser');
     Route::put('my-profile/{remember_token}','UsersController@updateProfile');
+
 });
