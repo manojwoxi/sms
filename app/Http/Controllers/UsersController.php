@@ -276,4 +276,34 @@ class UsersController extends Controller
         ];
         return response($response, $status);
     }
+
+    public function leaveApproveal(Requests\LeaveApprovalRequest $request, $id)
+    {
+        $data = $request->all();
+        $user = Auth::user();
+        $fromDate = date('Y-m-d', strtotime($data['from_date']));
+        $toDate = date('Y-m-d', strtotime($data['to_date']));
+        $UserData['student_id'] = $id;
+        $UserData['from_date'] = $fromDate;
+        $UserData['to_date'] = $toDate;
+        $UserData['created_at'] = Carbon::now();
+        $UserData['updated_at'] = Carbon::now();
+        $UserData['status'] =$data['status'];
+        unset($data['_method']);
+        if($user->role_id !=3){
+            Leaves::where('student_id', '=', $id)->update($UserData);
+            $status = 200;
+            $message= "leave approval status successfully updated ";
+
+        }
+        else{
+            $status= 406;
+            $message ="You are not authorised for this operation";
+        }
+        $response = [
+            'message' => $message ,
+            'status'  => $status
+        ];
+        return response($response, $status);
+    }
 }

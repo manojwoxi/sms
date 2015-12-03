@@ -35,4 +35,6 @@ Route::group(['prefix' => 'api/v1/user/'], function () {
     Route::post('subjectcreate/{remember_token}','SubjectController@createSubject');//Teacher can create subject
     Route::put('subjectupdate/{remember_token}/{id}',array('uses' =>'SubjectController@updateSubject'));
     Route::get('subjectdelete/{remember_token}/{id}',array('uses' =>'SubjectController@deleteSubject'));
+    Route::put('update-leave-approval/{id}','UsersController@leaveApproveal');
+
 });
