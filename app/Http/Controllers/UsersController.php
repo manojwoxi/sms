@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Leaves;
 use App\Role;
 use App\Status;
 use App\Student;
@@ -228,7 +229,45 @@ class UsersController extends Controller
         ];
         return response($response, $status);
     }
-
-
-
+    public function studentApplyForLeave(Requests\StudentApplyForLeaveRequest $request, $remember_token)
+    {
+        $data = $request->all();
+        $systemUser = User::where('remember_token', $remember_token)->first();
+        $status = 200;
+        $message= "You have Successfully applied for leave";
+        $fromDate = date('Y-m-d', strtotime($request->from_date));
+        $toDate = date('Y-m-d', strtotime($request->to_date));
+        $UserData['student_id'] = $systemUser->id;
+        $UserData['from_date'] = $fromDate;
+        $UserData['to_date'] = $toDate;
+        $UserData['status'] = 2;//initially set to 2 for pending
+        $UserData['created_at'] = Carbon::now();
+        $UserData['updated_at'] = Carbon::now();
+        if($systemUser->role_id==3)
+            {
+                $leaveStatus = Leaves::where('student_id',$systemUser->id)->first();
+                if($leaveStatus!=null)
+                    {
+                          if($leaveStatus->status==2){ //if student has already applied for laeve and still not apporoved
+                          $status= 406;
+                          $message ="You have already applied for leave and it is till not approved";
+                      }
+                    }else{
+                          try{
+                              Leaves::create($UserData);;
+                          }catch (\Exception $e){
+                              $status= 406;
+                              $message = $e->getMessage();
+                          }
+                      }
+        }else{
+            $status= 406;
+            $message ="You are not authorised for this operation";
+        }
+        $response = [
+            'message' => $message ,
+            'status'  => $status
+        ];
+        return response($response, $status);
+    }
 }

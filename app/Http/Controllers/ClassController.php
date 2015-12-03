@@ -12,8 +12,6 @@ use App\Http\Controllers\Controller;
 
 class ClassController extends Controller
 {
-
-
     public function createClass(Requests\CreateClassRequest $request)
     {
         try{
@@ -32,8 +30,6 @@ class ClassController extends Controller
             "message" => $message
         ];
         return response($response, $status);
-
-
     }
 
     public function updateClass(Requests\CreateClassRequest $request,$id)
@@ -55,14 +51,10 @@ class ClassController extends Controller
             "message" => $message
         ];
         return response($response, $status);
-
-
-
     }
 
     public function deleteClass(Requests\CreateClassRequest $request,$id)
     {
-
         try{
             $request->all();
             $status = 200;
@@ -78,8 +70,5 @@ class ClassController extends Controller
             "message" => $message
         ];
         return response($response, $status);
-
-
-
     }
 }
