@@ -212,7 +212,7 @@ class UsersController extends Controller
             $UserData = $this->unsetKeys($userKeys, $UserData);
             $systemUser = User::where('id', $id)->first();
             $status = 200;
-            $message= "Student Profile updated successfully";
+            $message= "Teacher Profile updated successfully";
             $birthdate = date('Y-m-d', strtotime($request->birthdate));
             $UserData['birthdate'] = $birthdate;
             $UserData['updated_at'] = Carbon::now();
