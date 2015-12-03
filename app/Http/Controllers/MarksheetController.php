@@ -28,10 +28,7 @@ class MarksheetController extends Controller
             "message" => $message
         ];
         return response($response, $status);
-
-
     }
-
     public function updateMarksheet(Requests\CreateMarksheetRequest $request,$id)
     {
         try{
@@ -51,10 +48,5 @@ class MarksheetController extends Controller
             "message" => $message
         ];
         return response($response, $status);
-
-
-
     }
-
-
 }

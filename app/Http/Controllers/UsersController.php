@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-
     public function confirm($confirmation)
     {
         $user = User::where('remember_token', $confirmation)->first();
@@ -41,8 +40,6 @@ class UsersController extends Controller
         ];
         return response($response, $status);
     }
-
-
     public function storeStudent($studentData)
     {
         $result = array();
@@ -245,13 +242,22 @@ class UsersController extends Controller
         $UserData['updated_at'] = Carbon::now();
         if($systemUser->role_id==3)
             {
-                $leaveStatus = Leaves::where('student_id',$systemUser->id)->first();
+                $leaveStatus=Leaves::where('student_id',$systemUser->id)
+                           ->where('status', '2')->first();
                 if($leaveStatus!=null)
                     {
                           if($leaveStatus->status==2){ //if student has already applied for laeve and still not apporoved
                           $status= 406;
                           $message ="You have already applied for leave and it is till not approved";
-                      }
+                      }else
+                          {
+                              try{
+                                  Leaves::create($UserData);;
+                              }catch (\Exception $e){
+                                  $status= 406;
+                                  $message = $e->getMessage();
+                              }
+                          }
                     }else{
                           try{
                               Leaves::create($UserData);;
