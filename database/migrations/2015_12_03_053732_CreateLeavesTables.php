@@ -17,7 +17,6 @@ class CreateLeavesTables extends Migration
             $table->integer('student_id')->unsigned();
             $table->date('from_date',20);
             $table->date('to_date',20);
-            $table->date('date',20);
             $table->string('status',20);
             $table->timestamps();
         });
