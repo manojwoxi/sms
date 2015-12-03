@@ -29,4 +29,7 @@ Route::group(['prefix' => 'api/v1/user/'], function () {
     Route::get('class/{id}',array('uses' =>'ClassController@deleteClass'));
     Route::put('teacher-my-profile/{remember_token}','UsersController@updateTeacherProfile');//Teacher updating his own profile
     Route::put('student-my-profile/{remember_token}','UsersController@updateStudentProfile');//Student updating his own profile
+    Route::put('update-student-profile/{remember_token}/{id}','UsersController@adminUpdateStudentProfile');// Admin can updateStudent profile
+    Route::put('update-teacher-profile/{remember_token}/{id}','UsersController@adminUpdateTeacherProfile');//Admin can update Student profile
+
 });
