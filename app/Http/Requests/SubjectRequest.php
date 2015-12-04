@@ -59,10 +59,12 @@ class SubjectRequest extends Request
         switch ($this->method()) {
             case 'PUT':
                 return [
+                    'class_id'=>'required|min:1|max:2',
                     'name' => 'required|min:3|max:50'];
                 break;
             case 'POST':
                 return [
+                    'class_id'=>'required|min:1|max:2',
                     'name' => 'required|min:3|max:50'];
                 break;
             case 'GET':

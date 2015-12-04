@@ -86,7 +86,44 @@ class UsersController extends Controller
         $response = [
             "message" => $message
         ];
+
+
+}public function  updateProfile(Requests\UpdateStudentProfileRequest $request, $remember_token , $id )
+{
+
+    try {
+        $UserData = $request->all();
+        $userKeys = array(
+            'email',
+            'username',
+            '_method',
+            'password',
+            ' is_active',
+            ' status_id ',
+            ' role_id ',
+            ' creator_id ',
+            ' remember_token ',
+        );
+        $UserData = $this->unsetKeys($userKeys, $UserData);
+        $systemUser = User::where('id', $id)->first();
+        $status = 200;
+        $message= "Student Profile updated successfully";
+        $birthdate = date('Y-m-d', strtotime($request->birthdate));
+        $UserData['birthdate'] = $birthdate;
+        $UserData['updated_at'] = Carbon::now();
+        User::where('id',$systemUser->id)
+            ->update($UserData);
+    } catch (\Exception $e) {
+        $status = 500;
+        $message= "Profile updating failed"  . $e->getMessage();
+    }
+    $response = [
+        'message' => $message ,
+        'status'  => $status
+    ];
+    return response($response, $status);
 }
+
     public function updateTeacherProfile(Requests\UpdateTeacherProfileRequest $request, $remember_token)
     {
       try {
@@ -247,7 +284,7 @@ class UsersController extends Controller
                 if($leaveStatus!=null)
                     {
                           if($leaveStatus->status==2){ //if student has already applied for laeve and still not apporoved
-                          $status= 406;
+                          $status= 500;
                           $message ="You have already applied for leave and it is till not approved";
                       }else
                           {

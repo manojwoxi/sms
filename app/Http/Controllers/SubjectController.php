@@ -58,7 +58,6 @@ class SubjectController extends Controller
             $status = 200;
             $message = "Subject deleted successfully";
             Subject::where('id', '=', $id)->delete();
-
         }
         catch (\Exception $e) {
             $status = 500;

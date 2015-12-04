@@ -62,29 +62,35 @@ class MarksheetController extends Controller
     {
         $systemUser =User::where('remember_token', $remember_token)->first();
         $student =Student::where('user_id',$systemUser->id)->first();
-        $markSheet=Marksheet::where('stud_id',$student->id)->get();
-        $status = 200;
-        $message="Your marks are as follows :";
+        if(!$student==null)
+            $result= Marksheet::where('stud_id', '=',$student->id)->get();
+            if($result->isEmpty()){
+                $message="No marksheet found to view";
+                $result="";
+                $status=406;
+            }else{
+                $status = 200;
+                $message="Your marks are as follows :";
+             }
         $response = [
             "message" => $message,
-            "marksheet"=> $markSheet,
+            "marksheet"=> $result,
         ];
         return response($response, $status);
     }
-
     public function deleteMarksheet(Requests\deleteMarksheet $request,$remember_token, $id )
     {
         try{
             $request->all();
             $student =Student::where('id',$id)->first();
            if($student==null){
-               $message="No student found";
+               $message="No student Data found";
                $status=406;
            }else{
                $result= Marksheet::where('stud_id', '=',$student->id)->get();
                if($result->isEmpty()){
                    $message="No marksheet found for this student to delete";
-                   $status=406;
+                   $status=500;
                }else{
                       $status = 200;
                        $message = "Marksheet information deleted successfully";
