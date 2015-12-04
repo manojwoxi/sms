@@ -10,7 +10,35 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Http\Controllers\Auth\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+        return view('welcome');
+});
+
+
+Route::group(['prefix' => 'api/v1/user/'], function () {
+
+    Route::get('confirm/{remember_token}','UsersController@confirm');
+    Route::post('auth','Auth\AuthController@authenticate');
+    Route::get('logout','Auth\AuthController@logout');
+    Route::post('create','UsersController@storeUser');
+    Route::put('studentProfileUpdate/{remember_token}/{id}','UsersController@updateProfile');// Teacher can update student profile
+    Route::post('class','ClassController@createClass');
+    Route::put('class/{id}',array('uses' =>'ClassController@updateClass'));
+    Route::get('class/{id}',array('uses' =>'ClassController@deleteClass'));
+    Route::put('teacher-my-profile/{remember_token}','UsersController@updateTeacherProfile');//Teacher updating his own profile
+    Route::put('student-my-profile/{remember_token}','UsersController@updateStudentProfile');//Student updating his own profile
+    Route::post('marksheet','MarksheetController@createMarksheet');
+    Route::put('marksheet/{id}','MarksheetController@updateMarksheet');
+    Route::get('viewmarksheet/{remember_token}','MarksheetController@viewMarksheet');
+    Route::get('deletemarksheet/{remember_token}/{id}','MarksheetController@deleteMarksheet');
+    Route::put('update-student-profile/{remember_token}/{id}','UsersController@adminUpdateStudentProfile');// Admin can updateStudent profile
+    Route::put('update-teacher-profile/{remember_token}/{id}','UsersController@adminUpdateTeacherProfile');//Admin can update Student profile
+    Route::post('applyforleave/{remember_token}','UsersController@studentApplyForLeave');//Student can apply for date
+    Route::post('subjectcreate/{remember_token}','SubjectController@createSubject');//Teacher can create subject
+    Route::put('subjectupdate/{remember_token}/{id}',array('uses' =>'SubjectController@updateSubject'));//Teacher can update subject
+    Route::get('subjectdelete/{remember_token}/{id}',array('uses' =>'SubjectController@deleteSubject'));//teacher can delete subject
+    Route::put('update-leave-approval/{id}','UsersController@leaveApproveal');
+
 });
