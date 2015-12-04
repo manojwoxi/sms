@@ -18,11 +18,12 @@ class CreateMarksheetRequest extends Request
         if(!isset($this->uid) && $this->uid==null){
             switch ($this->method()) {
                 case 'GET':
-                    $user = Auth::user();
-                    $isOwner = User::where('id', '=', $user->id)->count();
-                    if ($isOwner) {
+                    $data = $this->request->all();
+                    $token = $this->route('remember_token');
+                    $userToken = User::where('remember_token',$token)->first();
+                    if($userToken!=null && $userToken->role_id == 3){
                         return true;
-                    } else {
+                    }else{
                         return false;
                     }
                     break;
