@@ -34,5 +34,9 @@ Route::group(['prefix' => 'api/v1/user/'], function () {
     Route::put('update-student-profile/{remember_token}/{id}','UsersController@adminUpdateStudentProfile');// Admin can updateStudent profile
     Route::put('update-teacher-profile/{remember_token}/{id}','UsersController@adminUpdateTeacherProfile');//Admin can update Student profile
     Route::post('applyforleave/{remember_token}','UsersController@studentApplyForLeave');//Student can apply for date
+    Route::post('subjectcreate/{remember_token}','SubjectController@createSubject');//Teacher can create subject
+    Route::put('subjectupdate/{remember_token}/{id}',array('uses' =>'SubjectController@updateSubject'));//Teacher can update subject
+    Route::get('subjectdelete/{remember_token}/{id}',array('uses' =>'SubjectController@deleteSubject'));//teacher can delete subject
     Route::put('update-leave-approval/{id}','UsersController@leaveApproveal');
+
 });
